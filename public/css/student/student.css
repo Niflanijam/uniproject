@@ -1,0 +1,99 @@
+
+body{
+    background-color: rgb(195, 218, 238);
+}
+
+table {
+    background-color: rgb(10, 50, 89);
+  width: 100%;
+  
+  border-collapse: collapse;
+}
+th{
+  background-color: rgb(69, 127, 185);
+  color: aliceblue;
+}
+table, th, td {
+  border: 1px solid black;
+  
+}
+a:hover{
+    color: aliceblue;
+    
+    background-color: rgb(26, 60, 114);
+}
+a{
+    background-color: rgb(69, 127, 185);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: center;
+    font-size: large;
+    margin-bottom: 20px;
+    margin-left: 600px;
+    margin-bottom: 20px;
+    padding: 20px;
+   width: 100%;
+   color: #fff;
+   
+   
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  color: aliceblue;
+  font-size: larger;
+}
+button {
+  
+  margin: 2px;
+  cursor: pointer;
+  color:whitesmoke;
+  background-color: rgb(216, 33, 33);
+  border-color: gainsboro;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  margin-right: 1px;
+  text-align: center;
+  align-content: center;
+  font-size: 15px;
+  font-family:  Arial, sans-serif;
+
+}
+
+button:hover{
+  background:  rgb(69, 127, 185);
+}
+
+
+@media screen and (max-width: 768px){
+
+
+   th, td {
+   
+   
+    max-width: 100%;
+}
+
+
+
+
+
+table{
+width: 100%;
+margin: 10px;
+
+}
+
+a{
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  
+}
+
+
+
+
+}

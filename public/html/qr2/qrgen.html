@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="/css/register/register.css">
+
+    
+    
+</head>
+<body>
+    <div class="wrapper">
+    <h1>Generate QR Code</h1>
+    <form id="qr-form">
+      
+        <input type="text" id="text" name="text" class="input1" required placeholder="Type the Index">
+        <button type="submit" class="btn">Generate QR Code</button>
+        <button type="button" id="save-button" class="btn" >Save QR Code</button>
+
+        <p>QR Scan<a class="link1" href="http://localhost:3001/html/qrscan/qrscan.html">QR scanning</a></p><br>
+        <p>Back <a href="http://localhost:3001/html/home/index4.html" >Home</a></p>
+    </form>
+
+   
+    <div id="qrcode" class="qrCodeImage"></div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="./qrgen.js">  
+    </script>
+</body>
+</html>

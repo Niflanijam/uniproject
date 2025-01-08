@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Attendance-ADD Student</title>
+    <link rel="stylesheet" href="/css/login/logincss.css">
+
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <form action="/student" method="POST" id="studentForm">
+            <h1>Add A New Student</h1>
+            <div class="input1">
+                <input type="text" placeholder="Name" name="Name" required autocomplete="new-username">
+            </div>
+            <div class="input1">
+                <input type="text" placeholder="Index_No" name="Index" required autocomplete="new-password">
+            </div>
+            <div class=" input1">
+                <input type="text" placeholder="Reg_no" name="Reg" required autocomplete="new-password">
+             </div>
+             <br>
+             <label for=" batch">Select Batch </label>
+                <select id="batch" name="batch">
+                    <option value="2019/2020">2019/2020</option>
+                    <option value="2020/2021">2020/2021</option>
+                    <option value="2021/2022">2021/2022</option>
+
+                </select>
+                <br><br>
+                <button type="submit" class="btn">Add</button>
+                <div id="message" class="hidden"></div>
+                
+
+                <div class="register">
+
+
+                    <p>Go to Student List <a class="link1" href="http://localhost:3001/student-list">View Students</a></p>
+<br>
+                    <p>Deleting student<a class="link1" href="./deletestudent.html">Delete Students</a></p>
+
+                    <br>
+                   
+                </div>
+        </form>
+    </div>
+
+    
+    
+    
+    
+    
+
+</body>
+<script>
+   
+
+   document.getElementById('studentForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = {
+        Name: formData.get('Name'),
+        Index: formData.get('Index'),
+        Reg: formData.get('Reg'),
+        batch: formData.get('batch')
+    };
+
+    try {
+        const response = await fetch('/student', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        const messageDiv = document.getElementById('message');
+        
+        if (response.ok) {
+            messageDiv.innerText = result.message;
+            messageDiv.className = 'success';
+        } else {
+            messageDiv.innerText = result.message;
+            messageDiv.className = 'error';
+        }
+
+        messageDiv.style.display = 'block'; // Show the message
+    } catch (error) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerText = 'An error occurred while adding the student.';
+        messageDiv.className = 'error';
+        messageDiv.style.display = 'block'; // Show the message
+    }
+});
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+
+
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+</script>
+
+</html>

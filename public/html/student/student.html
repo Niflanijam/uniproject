@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Attendance-Student List</title>
+  <link rel="stylesheet" href="./css/student/student.css">
+
+
+</head>
+
+<body >
+
+  <h1 style="text-align: center;">Student List</h1>
+  <br>
+  <a href="/report-pdf" class="btn">Download Attendance Report (PDF)</a>
+  <button id="resetButton" class="btn">Reset Attendance</button>
+
+  <br>
+
+
+  <table id="student-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Index</th>
+        <th>Reg</th>
+        <th>Batch</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</body>
+<script>
+
+
+
+    async function fetchStudents() {
+            try {
+                const response = await fetch('/student');
+                const students = await response.json();
+                const tableBody = document.querySelector('#student-table tbody');
+                tableBody.innerHTML = ''; // Clear existing rows
+                students.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student.Name}</td>
+                        <td>${student.Index}</td>
+                        <td>${student.Reg}</td>
+                        <td>${student.batch}</td>
+                        <td>
+                            <button id="attend-${student.Index}" onclick="markAttendance('${student.Index}')" ${student.attended ? 'disabled' : ''}>
+                                ${student.attended ? 'Attended' : 'Attend'}
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching student data:', error);
+            }
+        }
+
+        async function markAttendance(Index) {
+            const attendButton = document.getElementById(`attend-${Index}`);
+            if (attendButton.disabled) {
+                alert('You have already marked your attendance.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/attend/${Index}`, { method: 'POST' });
+                const result = await response.json();
+                alert(result.message);
+
+                if (response.status === 200 && result.message === 'Attendance marked successfully') {
+                    attendButton.innerText = 'Attended';
+                    attendButton.disabled = true;
+                } else if (result.message === 'You have already marked your attendance.') {
+                    alert('You have already marked your attendance.');
+                    attendButton.innerText = 'Attended';
+                    attendButton.disabled = true;
+                }
+            } catch (error) {
+                console.error('Error marking attendance:', error);
+                alert('Error marking attendance. Please try again.');
+            }
+        }
+
+        // Fetch students when the page loads
+        document.addEventListener('DOMContentLoaded', fetchStudents);
+
+        document.getElementById('resetButton').addEventListener('click', () => {
+            fetch('/reset-attendance', { method: 'POST' })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                    location.reload(); // Refresh the page to update the table
+                })
+                .catch(error => {
+                    console.error('Error resetting attendance:', error);
+                });
+        });
+
+    fetch('/attendance-report')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#student-table tbody');
+                tableBody.innerHTML = ''; // Clear any existing rows
+                data.forEach(student => {
+                    const row = document.createElement('tr');
+                    const formattedDate = new Date(student.date).toLocaleDateString(); // Format date if needed
+                    row.innerHTML = `
+                        <td>${student.Name}</td>
+                        <td>${student.Index}</td>
+                        <td>${student.Reg}</td>
+                        <td>${student.batch}</td>
+                        <td>${formattedDate}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching attendance report:', error);
+            });
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

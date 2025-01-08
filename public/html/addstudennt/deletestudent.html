@@ -1,0 +1,114 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Attendance-DELETE Student</title>
+    <link rel="stylesheet" href="/css/login/logincss.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="/delete" method="POST" id="studentForm">
+            <h1>Delete Student</h1>
+            <div class="input1">
+                <input type="text" placeholder="Index" name="Index" required autocomplete="new-username">
+            </div>
+            <div class=" input1">
+                <input type="text" placeholder="Reg_no" name="Reg" required autocomplete="new-password"">
+             </div>
+
+             <br><br>
+             <button type=" submit" class="btn">Delete</button>
+             <div id="message" class="hidden"></div>
+
+                <div class="register">
+                    <p>Go to Student List <a class="link1" href="http://localhost:3001/student-list">View Students</a>
+                    </p>
+                    <br>
+                </div>
+
+
+        </form>
+    </div>
+</body>
+
+<script>
+document.getElementById('studentForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = {
+        Index: formData.get('Index'),
+        Reg: formData.get('Reg'),
+    };
+
+    try {
+        const response = await fetch('/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        const messageDiv = document.getElementById('message');
+        
+        if (response.ok) {
+            messageDiv.innerText = result.message;
+            messageDiv.className = 'success';
+        } else {
+            messageDiv.innerText = result.message;
+            messageDiv.className = 'error';
+        }
+
+        messageDiv.style.display = 'block'; // Show the message
+    } catch (error) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerText = 'An error occurred while deleting the student.';
+        messageDiv.className = 'error';
+        messageDiv.style.display = 'block'; // Show the message
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+</SCript>
+
+</html>
